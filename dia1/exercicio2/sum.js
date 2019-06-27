@@ -1,10 +1,4 @@
-// Soma todos os números do array
-function sumAll(arr) {
-  return arr.reduce((a, b) => a + b);
-}
-
 // Soma o intervalo entre os números
-
 function sumInterval(arr) {
   var array = [];
   arr.sort((a, b) => a - b); // Coloca o array em ordem crescente
@@ -13,7 +7,7 @@ function sumInterval(arr) {
     array[i] = arr[0] + i;
   }
 
-  return sumAll(array);
+  return array.reduce((a, b) => a + b);
 }
 
 sumInterval([1,4]);
