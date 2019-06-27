@@ -13,4 +13,4 @@ function destroyer() {
   });
 }
 
-destroyer([1,2,3,1], 2, 3);
+// const destroyer = (arr, ...params) => (arr.filter(n => !params.find(p => p === n)))
