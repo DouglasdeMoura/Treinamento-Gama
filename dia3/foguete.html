@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Lançamento de foguete</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        font-family: sans-serif;
+      }
+      .linha {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
+
+      .linha > div {
+        flex: 1;
+      }
+      .contador,
+      .base {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .contador {
+        background: navy;
+        color: #fff;
+        justify-content: center;
+      }
+
+      .base {
+        justify-content: flex-end;
+        transition: all 5s ease 0s;
+      }
+
+
+      .foguete {
+        font-size: 60px;
+        position: absolute;
+      }
+
+      .rotate {
+        transform: rotate(-45deg);
+        position: absolute;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="linha">
+      <div class="coluna contador">
+        <div class="conteudo">
+          <p><strong>Escolha o foguete</strong></p>
+          <p>
+          <label><input type="radio" name="foguete" value="🚀" checked>🚀</label>
+          <label><input type="radio" name="foguete" value="🙭">🙭</label>
+          <label><input type="radio" name="foguete" value="🛸">🛸</label>
+          </p>
+
+          <p><input type="number" id="tempo" min="1"></p>
+          <button id="botao">Contagem</button>
+          <p id="contagem"></p>
+        </div>
+
+      </div>
+      <div class="coluna base">
+        <span id="foguete" class="foguete"><span class="rotate">🚀</span></span>
+      </div>
+    </div>
+    <script>
+    ( function() {
+      var input, escolha, tempo, botao, contador, foguete, subida;
+      botao = document.getElementById('botao');
+      escolha = document.getElementsByName('foguete');
+      subida = 0;
+
+      escolha.forEach((el) => {
+        el.addEventListener('click', () => {
+          var rocket = document.querySelector('input[name="foguete"]:checked').value;
+          if ('🚀' == rocket) {
+            rocket = '<span class="rotate">' + rocket + '</span>'
+          }
+          document.getElementById('foguete').innerHTML = rocket;
+        });
+      });
+
+      botao.addEventListener('click', () => {
+        input = document.getElementById('tempo');
+        tempo = Number(input.value) + 1;
+        botao.disabled = true;
+        input.disabled = true;
+
+        contador = window.setInterval(() => {
+          tempo = tempo - 1;
+          if (0 <= tempo) {
+            document.getElementById('contagem').innerHTML = tempo;
+          } else {
+            document.getElementById('contagem').innerHTML = 'Lançar!';
+            clearInterval(contador);
+            lancamento = window.setInterval(() => {
+              var audio = new Audio('Rocket-SoundBible.com.mp3');
+              audio.play();
+              subida = subida + 1;
+              foguete = document.getElementById('foguete');
+              foguete.style.bottom = 'calc(1vh + ' + subida +'px)';
+              foguete.getBoundingClientRect();
+              if (-150 >= foguete.getBoundingClientRect().top) {
+                clearInterval(lancamento);
+                audio.pause();
+                alert('O lançamento foi um sucesso!');
+              }
+            }, 5);
+          }
+        }, 1000);
+      });
+    } )();
+    </script>
+  </body>
+</html>

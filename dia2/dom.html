@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Manipulação do DOM</title>
+</head>
+<body>
+<div class="ex-1">
+  <input type="text" class="input-1">
+  <button class="button-1">Adicionar</button>
+  <ul id="resultado-1">
+
+  </ul>
+</div>
+
+<div class="ex-2">
+  <input type="text" class="input-2">
+  <div id="resultado-2">
+
+  </div>
+</div>
+
+<div class="ex-3">
+  <input type="text" class="input-3">
+  <div id="resultado-3">
+
+  </div>
+</div>
+
+<div class="ex-4">
+  <button class="button-4">Sortear fruta</button>
+  <div id="resultado-4">
+
+  </div>
+</div>
+
+<div class="ex-5">
+  <button class="button-5">Sortear fruta</button>
+  <div id="resultado-5">
+
+  </div>
+</div>
+<script>
+( function() {
+  var btn1, input2, input3;
+  var btn1 = document.getElementsByClassName('button-1')[0];
+  var input2 = document.getElementsByClassName('input-2')[0];
+  var input3 = document.getElementsByClassName('input-3')[0];
+  var btn4 = document.getElementsByClassName('button-4')[0];
+  var btn5 = document.getElementsByClassName('button-5')[0];
+
+  let imagens = [
+    {
+      fruta: 'laranja',
+      imagem: 'https://loremflickr.com/300/300/laranja'
+    },
+    {
+      fruta: 'morango',
+      imagem: 'https://loremflickr.com/300/300/morango'
+    },
+    {
+      fruta: 'maçã',
+      imagem: 'https://loremflickr.com/300/300/apple'
+    },
+    {
+      fruta: 'banana',
+      imagem: 'https://loremflickr.com/300/300/banana'
+    },
+    {
+      fruta: 'ameixa',
+      imagem: 'https://loremflickr.com/300/300/ameixa'
+    },
+    {
+      fruta: 'uva',
+      imagem: 'https://loremflickr.com/300/300/uva'
+    },
+    {
+      fruta: 'mamão',
+      imagem: 'https://loremflickr.com/300/300/mamão'
+    },
+    {
+      fruta: 'abacate',
+      imagem: 'https://loremflickr.com/300/300/abacate'
+    },
+    {
+      fruta: 'cacau',
+      imagem: 'https://loremflickr.com/300/300/cacau'
+    },
+    {
+      fruta: 'caju',
+      imagem: 'https://loremflickr.com/300/300/caju'
+    },
+  ];
+
+  var img = imagens;
+
+  btn1.addEventListener( 'click', () => {
+    var value = document.createTextNode(document.getElementsByClassName('input-1')[0].value);
+    var node = document.createElement('li');
+    node.appendChild(value);
+    document.getElementById('resultado-1').appendChild(node);
+  }, true );
+
+  input2.addEventListener( 'keyup', () => {
+    document.getElementById('resultado-2').innerText = document.getElementsByClassName('input-2')[0].value;
+  }, true );
+
+  input3.addEventListener( 'keyup', () => {
+    var fruta = document.getElementsByClassName('input-3')[0].value;
+    imagens.forEach((imagem) => {
+      if (fruta === imagem['fruta']) {
+        document.getElementById('resultado-3').innerHTML = '<img src="' + imagem['imagem'] + '" alt="' + fruta + '">';
+      }
+    });
+  }, true );
+
+  btn4.addEventListener( 'click', () => {
+    var imagem = imagens[Math.floor(Math.random() * imagens.length)];
+    document.getElementById('resultado-4').innerHTML = '<img src="' + imagem['imagem'] + '" alt="' + imagem['fruta'] + '">';
+  }, true );
+
+  btn5.addEventListener( 'click', () => {
+    var indice = Math.floor(Math.random() * img.length);
+    var imagem = img[indice];
+    img = img.splice(indice, 1);
+    document.getElementById('resultado-5').innerHTML = '<img src="' + imagem['imagem'] + '" alt="' + imagem['fruta'] + '">';
+    console.log(img);
+  }, true );
+
+} )();
+</script>
+</body>
+</html>
