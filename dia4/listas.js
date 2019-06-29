@@ -1,4 +1,4 @@
-var alunos = [
+let alunos = [
   {nome: 'Felipe M.', sexo: 'M', idade: 13},
   {nome: 'Luiza A.', sexo: 'F', idade: 14},
   {nome: 'Marcos T.', sexo: 'M', idade: 14},
@@ -12,9 +12,9 @@ alunos.forEach((aluno) => {
 });
 
 // dobrar a idade
-alunos.map((aluno) => {
+alunos.map((aluno) => { // O método map() altera o array
   aluno.idade = aluno.idade * 2;
-  return aluno;
+  return alunos;
 });
 
 // Filtrar somente para o sexo F
