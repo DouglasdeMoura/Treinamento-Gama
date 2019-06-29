@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Pokedex</title>
+</head>
+<body>
+<input type="text" id="pokemon">
+<button id="botao">Mostrar Pokémon</button>
+<div id="info">
+
+</div>
+<script>
+const url = 'https://pokeapi.co/api/v2/pokemon/';
+const botao = document.getElementById('botao');
+const info = document.getElementById('info');
+
+var pokemon = document.getElementById('pokemon');
+
+botao.addEventListener('click', () => {
+  let request = url + pokemon.value + '/';
+  fetch(request)
+  .then((resp) => resp.json())
+  .then((data) => {
+      info.innerHTML = '<img src="' + data.sprites.front_default +'" alt="' + data.name +'">';
+      console.log(data);
+  })
+  .catch((error) => {
+      console.log(error);
+      info.innerHTML = '<p>Pokémon não encontrado</p>';
+  });
+});
+</script>
+</body>
+</html>
